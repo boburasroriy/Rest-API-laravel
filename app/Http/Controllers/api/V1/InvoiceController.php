@@ -1,10 +1,15 @@
 <?php
 
-namespace app\Http\Controllers\api\V1;
+namespace App\Http\Controllers\api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
+use App\Http\Resources\V1\InvoiceCollaction;
+use App\Http\Resources\V1\InvoiceResource;
+use App\Http\Resources\V1\CustomerCollection;
+use App\Http\Resources\V1\CustomerResource;
+
 use App\Models\Invoice;
 
 class InvoiceController extends Controller
@@ -12,9 +17,10 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() : InvoiceCollaction
     {
-        //
+        return new InvoiceCollaction(Invoice::all());
+
     }
 
     /**
@@ -36,9 +42,10 @@ class InvoiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice)
+    public function show(Invoice $invoice): InvoiceResource
     {
-        //
+        return new InvoiceResource($invoice);
+
     }
 
     /**
